@@ -33,6 +33,10 @@ class Recipe(ConanFile):
     generators = "cmake_find_package"
     exports_sources = "src*", "include*", "doc*", "waf", "wscript", "waflib*", "serd.pc.in"
 
+    def configure(self):
+        del self.settings.compiler.libcxx
+        del self.settings.compiler.cppstd
+
     def validate(self):
         if self.settings.compiler == "Visual Studio":
             raise ConanInvalidConfiguration("Don't know how to setup WAF for VS.")
