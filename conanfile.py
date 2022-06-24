@@ -9,7 +9,7 @@ required_conan_version = ">=1.33.0"
 
 class Recipe(ConanFile):
     name = "serd"
-    version = "0.30.12"
+    version = "0.30.13-f6437f"
     homepage = "https://gitlab.com/drobilla/serd.git"
     description = "A lightweight C library for RDF syntax"
     topics = "linked-data", "semantic-web", "RDF", "turtle", "TriG", "NTriples", "NQuads"
@@ -17,7 +17,7 @@ class Recipe(ConanFile):
     scm = {
         "type": "git",
         "url": "https://gitlab.com/drobilla/serd.git",
-        "revision": "v" + version,
+        "revision": "f6437f606bd85dbc6d7581146955f85902230ca0",
         "submodule": "recursive"
     }
     settings = "build_type", "compiler", "os", "arch"
