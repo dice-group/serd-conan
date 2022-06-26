@@ -1,4 +1,4 @@
-#include <serd/serd.h> // Only one header file is required to be included
+#include <serd/serd.h>
 
 int main() {
     auto dummy = serd_reader_new(SERD_NTRIPLES, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr);

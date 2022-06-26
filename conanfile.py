@@ -2,7 +2,7 @@ import os
 
 from conans import ConanFile, tools
 from conans.errors import ConanInvalidConfiguration
-from conans.util.files import rmdir
+from conans.tools import rmdir
 
 required_conan_version = ">=1.33.0"
 
@@ -10,9 +10,10 @@ required_conan_version = ">=1.33.0"
 class Recipe(ConanFile):
     name = "serd"
     version = "0.30.12"
-    homepage = "https://gitlab.com/drobilla/serd.git"
+    url = "https://gitlab.com/drobilla/serd.git"
+    homepage = "https://drobilla.net/software/serd.html"
     description = "A lightweight C library for RDF syntax"
-    topics = "linked-data", "semantic-web", "RDF", "turtle", "TriG", "NTriples", "NQuads"
+    topics = "linked-data", "semantic-web", "rdf", "turtle", "trig", "ntriples", "nquads"
     author = "David Robillard <d@drobilla.net>"
     scm = {
         "type": "git",
@@ -30,10 +31,10 @@ class Recipe(ConanFile):
         "fPIC": True
     }
     license = "ISC"
-    generators = "cmake_find_package"
     exports_sources = "src*", "include*", "doc*", "waf", "wscript", "waflib*", "serd.pc.in"
 
     def configure(self):
+        # its a C library. So C++ properties compiler.{libcxx,cppstd} are not required.
         del self.settings.compiler.libcxx
         del self.settings.compiler.cppstd
 
@@ -50,7 +51,6 @@ class Recipe(ConanFile):
         args = " ".join(arg for arg in args)
 
         cflags = []
-        print(self.settings.build_type == "Release")
         if self.settings.build_type in ["Debug", "RelWithDebInfo"]:
             cflags += ["-g"]
         if self.settings.build_type in ["Release", "RelWithDebInfo"]:
@@ -74,4 +74,3 @@ class Recipe(ConanFile):
         libname = "{}-0".format(self.name)
         self.cpp_info.libs = [libname]
         self.cpp_info.includedirs = [f"include/{libname}/"]
-        self.cpp_info.cflags = ["-std=c11"]
